@@ -1,13 +1,9 @@
 import '/flutter_flow/flutter_flow_util.dart';
 import '/index.dart';
-import 'home_page_widget.dart' show HomePageWidget;
+import 'kanban_page_widget.dart' show KanbanPageWidget;
 import 'package:flutter/material.dart';
 
-class HomePageModel extends FlutterFlowModel<HomePageWidget> {
-  ///  Local state fields for this page.
-
-  String? newTaskTitle = '';
-
+class KanbanPageModel extends FlutterFlowModel<KanbanPageWidget> {
   @override
   void initState(BuildContext context) {}
 
