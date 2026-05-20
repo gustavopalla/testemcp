@@ -264,12 +264,11 @@ class ThemeTypography extends Typography {
         fontWeight: FontWeight.w600,
         fontSize: 20.0,
       );
-  String get titleMediumFamily => 'Inter Tight';
+  String get titleMediumFamily => 'Inter';
   bool get titleMediumIsCustom => false;
-  TextStyle get titleMedium => GoogleFonts.interTight(
-        color: theme.primaryText,
+  TextStyle get titleMedium => GoogleFonts.inter(
         fontWeight: FontWeight.w600,
-        fontSize: 18.0,
+        fontSize: 16.0,
       );
   String get titleSmallFamily => 'Inter Tight';
   bool get titleSmallIsCustom => false;

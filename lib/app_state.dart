@@ -78,6 +78,9 @@ class FFAppState extends ChangeNotifier {
               .toList() ??
           _doneList;
     });
+    _safeInit(() {
+      _currentCity = prefs.getString('ff_currentCity') ?? _currentCity;
+    });
   }
 
   void update(VoidCallback callback) {
@@ -247,6 +250,99 @@ class FFAppState extends ChangeNotifier {
     doneList.insert(index, value);
     prefs.setStringList(
         'ff_doneList', _doneList.map((x) => x.serialize()).toList());
+  }
+
+  /// DSL app state currentCity
+  String _currentCity = '';
+  String get currentCity => _currentCity;
+  set currentCity(String value) {
+    _currentCity = value;
+    prefs.setString('ff_currentCity', value);
+  }
+
+  /// DSL app state isLoading
+  bool _isLoading = false;
+  bool get isLoading => _isLoading;
+  set isLoading(bool value) {
+    _isLoading = value;
+  }
+
+  /// DSL app state hasError
+  bool _hasError = false;
+  bool get hasError => _hasError;
+  set hasError(bool value) {
+    _hasError = value;
+  }
+
+  /// DSL app state weatherCurrent
+  CurrentWeatherStruct _weatherCurrent = CurrentWeatherStruct();
+  CurrentWeatherStruct get weatherCurrent => _weatherCurrent;
+  set weatherCurrent(CurrentWeatherStruct value) {
+    _weatherCurrent = value;
+  }
+
+  void updateWeatherCurrentStruct(Function(CurrentWeatherStruct) updateFn) {
+    updateFn(_weatherCurrent);
+  }
+
+  /// DSL app state weatherHourly
+  List<HourlyForecastStruct> _weatherHourly = [];
+  List<HourlyForecastStruct> get weatherHourly => _weatherHourly;
+  set weatherHourly(List<HourlyForecastStruct> value) {
+    _weatherHourly = value;
+  }
+
+  void addToWeatherHourly(HourlyForecastStruct value) {
+    weatherHourly.add(value);
+  }
+
+  void removeFromWeatherHourly(HourlyForecastStruct value) {
+    weatherHourly.remove(value);
+  }
+
+  void removeAtIndexFromWeatherHourly(int index) {
+    weatherHourly.removeAt(index);
+  }
+
+  void updateWeatherHourlyAtIndex(
+    int index,
+    HourlyForecastStruct Function(HourlyForecastStruct) updateFn,
+  ) {
+    weatherHourly[index] = updateFn(_weatherHourly[index]);
+  }
+
+  void insertAtIndexInWeatherHourly(int index, HourlyForecastStruct value) {
+    weatherHourly.insert(index, value);
+  }
+
+  /// DSL app state weatherDaily
+  List<DailyForecastStruct> _weatherDaily = [];
+  List<DailyForecastStruct> get weatherDaily => _weatherDaily;
+  set weatherDaily(List<DailyForecastStruct> value) {
+    _weatherDaily = value;
+  }
+
+  void addToWeatherDaily(DailyForecastStruct value) {
+    weatherDaily.add(value);
+  }
+
+  void removeFromWeatherDaily(DailyForecastStruct value) {
+    weatherDaily.remove(value);
+  }
+
+  void removeAtIndexFromWeatherDaily(int index) {
+    weatherDaily.removeAt(index);
+  }
+
+  void updateWeatherDailyAtIndex(
+    int index,
+    DailyForecastStruct Function(DailyForecastStruct) updateFn,
+  ) {
+    weatherDaily[index] = updateFn(_weatherDaily[index]);
+  }
+
+  void insertAtIndexInWeatherDaily(int index, DailyForecastStruct value) {
+    weatherDaily.insert(index, value);
   }
 }
 

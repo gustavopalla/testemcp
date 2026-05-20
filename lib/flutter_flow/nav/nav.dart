@@ -35,27 +35,17 @@ GoRouter createRouter(AppStateNotifier appStateNotifier) => GoRouter(
       debugLogDiagnostics: true,
       refreshListenable: appStateNotifier,
       navigatorKey: appNavigatorKey,
-      errorBuilder: (context, state) => HomePageWidget(),
+      errorBuilder: (context, state) => WeatherPageWidget(),
       routes: [
         FFRoute(
           name: '_initialize',
           path: '/',
-          builder: (context, _) => HomePageWidget(),
+          builder: (context, _) => WeatherPageWidget(),
         ),
         FFRoute(
-          name: HomePageWidget.routeName,
-          path: HomePageWidget.routePath,
-          builder: (context, params) => HomePageWidget(),
-        ),
-        FFRoute(
-          name: KanbanPageWidget.routeName,
-          path: KanbanPageWidget.routePath,
-          builder: (context, params) => KanbanPageWidget(),
-        ),
-        FFRoute(
-          name: TaskPageWidget.routeName,
-          path: TaskPageWidget.routePath,
-          builder: (context, params) => TaskPageWidget(),
+          name: WeatherPageWidget.routeName,
+          path: WeatherPageWidget.routePath,
+          builder: (context, params) => WeatherPageWidget(),
         )
       ].map((r) => r.toRoute(appStateNotifier)).toList(),
     );
