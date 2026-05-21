@@ -3,33 +3,9 @@
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 
-import 'package:shared_preferences/shared_preferences.dart';
-
-const kThemeModeKey = '__theme_mode__';
-
-SharedPreferences? _prefs;
-
 abstract class FlutterFlowTheme {
-  static Future initialize() async =>
-      _prefs = await SharedPreferences.getInstance();
-
-  static ThemeMode get themeMode {
-    final darkMode = _prefs?.getBool(kThemeModeKey);
-    return darkMode == null
-        ? ThemeMode.system
-        : darkMode
-            ? ThemeMode.dark
-            : ThemeMode.light;
-  }
-
-  static void saveThemeMode(ThemeMode mode) => mode == ThemeMode.system
-      ? _prefs?.remove(kThemeModeKey)
-      : _prefs?.setBool(kThemeModeKey, mode == ThemeMode.dark);
-
   static FlutterFlowTheme of(BuildContext context) {
-    return Theme.of(context).brightness == Brightness.dark
-        ? DarkModeTheme()
-        : LightModeTheme();
+    return LightModeTheme();
   }
 
   @Deprecated('Use primary instead')
@@ -144,21 +120,21 @@ class LightModeTheme extends FlutterFlowTheme {
   @Deprecated('Use tertiary instead')
   Color get tertiaryColor => tertiary;
 
-  late Color primary = const Color(0xFF0B57D0);
+  late Color primary = const Color(0xFF1E6BFF);
   late Color secondary = const Color(0xFF39D2C0);
   late Color tertiary = const Color(0xFFF59E0B);
   late Color alternate = const Color(0xFFE0E3E7);
   late Color primaryText = const Color(0xFF14181B);
   late Color secondaryText = const Color(0xFF57636C);
-  late Color primaryBackground = const Color(0xFFF8FAFC);
-  late Color secondaryBackground = const Color(0xFFFFFFFF);
+  late Color primaryBackground = const Color(0xFFFFFFFF);
+  late Color secondaryBackground = const Color(0xFFF5F5F7);
   late Color accent1 = const Color(0x4C4B39EF);
   late Color accent2 = const Color(0x4D39D2C0);
   late Color accent3 = const Color(0x4DEE8B60);
   late Color accent4 = const Color(0xCCFFFFFF);
-  late Color success = const Color(0xFF10B981);
+  late Color success = const Color(0xFF2E7D32);
   late Color warning = const Color(0xFFF9CF58);
-  late Color error = const Color(0xFFDC362E);
+  late Color error = const Color(0xFFD32F2F);
   late Color info = const Color(0xFFFFFFFF);
 }
 
@@ -243,39 +219,35 @@ class ThemeTypography extends Typography {
         fontWeight: FontWeight.w600,
         fontSize: 32.0,
       );
-  String get headlineMediumFamily => 'Inter Tight';
+  String get headlineMediumFamily => 'Poppins';
   bool get headlineMediumIsCustom => false;
-  TextStyle get headlineMedium => GoogleFonts.interTight(
-        color: theme.primaryText,
-        fontWeight: FontWeight.w600,
+  TextStyle get headlineMedium => GoogleFonts.poppins(
+        fontWeight: FontWeight.bold,
         fontSize: 28.0,
       );
-  String get headlineSmallFamily => 'Inter Tight';
+  String get headlineSmallFamily => 'Poppins';
   bool get headlineSmallIsCustom => false;
-  TextStyle get headlineSmall => GoogleFonts.interTight(
-        color: theme.primaryText,
-        fontWeight: FontWeight.w600,
+  TextStyle get headlineSmall => GoogleFonts.poppins(
+        fontWeight: FontWeight.bold,
         fontSize: 24.0,
       );
-  String get titleLargeFamily => 'Inter Tight';
+  String get titleLargeFamily => 'Poppins';
   bool get titleLargeIsCustom => false;
-  TextStyle get titleLarge => GoogleFonts.interTight(
-        color: theme.primaryText,
+  TextStyle get titleLarge => GoogleFonts.poppins(
         fontWeight: FontWeight.w600,
-        fontSize: 20.0,
+        fontSize: 22.0,
       );
-  String get titleMediumFamily => 'Inter';
+  String get titleMediumFamily => 'Poppins';
   bool get titleMediumIsCustom => false;
-  TextStyle get titleMedium => GoogleFonts.inter(
+  TextStyle get titleMedium => GoogleFonts.poppins(
         fontWeight: FontWeight.w600,
         fontSize: 16.0,
       );
-  String get titleSmallFamily => 'Inter Tight';
+  String get titleSmallFamily => 'Poppins';
   bool get titleSmallIsCustom => false;
-  TextStyle get titleSmall => GoogleFonts.interTight(
-        color: theme.primaryText,
+  TextStyle get titleSmall => GoogleFonts.poppins(
         fontWeight: FontWeight.w600,
-        fontSize: 16.0,
+        fontSize: 14.0,
       );
   String get labelLargeFamily => 'Inter';
   bool get labelLargeIsCustom => false;
@@ -284,67 +256,36 @@ class ThemeTypography extends Typography {
         fontWeight: FontWeight.normal,
         fontSize: 16.0,
       );
-  String get labelMediumFamily => 'Inter';
+  String get labelMediumFamily => 'Poppins';
   bool get labelMediumIsCustom => false;
-  TextStyle get labelMedium => GoogleFonts.inter(
-        color: theme.secondaryText,
-        fontWeight: FontWeight.normal,
-        fontSize: 14.0,
-      );
-  String get labelSmallFamily => 'Inter';
-  bool get labelSmallIsCustom => false;
-  TextStyle get labelSmall => GoogleFonts.inter(
-        color: theme.secondaryText,
-        fontWeight: FontWeight.normal,
+  TextStyle get labelMedium => GoogleFonts.poppins(
+        fontWeight: FontWeight.w600,
         fontSize: 12.0,
       );
-  String get bodyLargeFamily => 'Inter';
+  String get labelSmallFamily => 'Poppins';
+  bool get labelSmallIsCustom => false;
+  TextStyle get labelSmall => GoogleFonts.poppins(
+        fontWeight: FontWeight.w600,
+        fontSize: 11.0,
+      );
+  String get bodyLargeFamily => 'Poppins';
   bool get bodyLargeIsCustom => false;
-  TextStyle get bodyLarge => GoogleFonts.inter(
-        color: theme.primaryText,
+  TextStyle get bodyLarge => GoogleFonts.poppins(
         fontWeight: FontWeight.normal,
         fontSize: 16.0,
       );
-  String get bodyMediumFamily => 'Inter';
+  String get bodyMediumFamily => 'Poppins';
   bool get bodyMediumIsCustom => false;
-  TextStyle get bodyMedium => GoogleFonts.inter(
-        color: theme.primaryText,
+  TextStyle get bodyMedium => GoogleFonts.poppins(
         fontWeight: FontWeight.normal,
         fontSize: 14.0,
       );
-  String get bodySmallFamily => 'Inter';
+  String get bodySmallFamily => 'Poppins';
   bool get bodySmallIsCustom => false;
-  TextStyle get bodySmall => GoogleFonts.inter(
-        color: theme.primaryText,
+  TextStyle get bodySmall => GoogleFonts.poppins(
         fontWeight: FontWeight.normal,
         fontSize: 12.0,
       );
-}
-
-class DarkModeTheme extends FlutterFlowTheme {
-  @Deprecated('Use primary instead')
-  Color get primaryColor => primary;
-  @Deprecated('Use secondary instead')
-  Color get secondaryColor => secondary;
-  @Deprecated('Use tertiary instead')
-  Color get tertiaryColor => tertiary;
-
-  late Color primary = const Color(0x00000000);
-  late Color secondary = const Color(0xFF39D2C0);
-  late Color tertiary = const Color(0x00000000);
-  late Color alternate = const Color(0xFF262D34);
-  late Color primaryText = const Color(0xFFFFFFFF);
-  late Color secondaryText = const Color(0xFF95A1AC);
-  late Color primaryBackground = const Color(0x00000000);
-  late Color secondaryBackground = const Color(0x00000000);
-  late Color accent1 = const Color(0x4C4B39EF);
-  late Color accent2 = const Color(0x4D39D2C0);
-  late Color accent3 = const Color(0x4DEE8B60);
-  late Color accent4 = const Color(0xB2262D34);
-  late Color success = const Color(0x00000000);
-  late Color warning = const Color(0xFFF9CF58);
-  late Color error = const Color(0x00000000);
-  late Color info = const Color(0xFFFFFFFF);
 }
 
 class FFDesignTokens {

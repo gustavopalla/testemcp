@@ -344,6 +344,34 @@ class FFAppState extends ChangeNotifier {
   void insertAtIndexInWeatherDaily(int index, DailyForecastStruct value) {
     weatherDaily.insert(index, value);
   }
+
+  /// Currently selected student id.
+  String _selectedAlunoId = '';
+  String get selectedAlunoId => _selectedAlunoId;
+  set selectedAlunoId(String value) {
+    _selectedAlunoId = value;
+  }
+
+  /// Currently selected student name.
+  String _selectedAlunoName = '';
+  String get selectedAlunoName => _selectedAlunoName;
+  set selectedAlunoName(String value) {
+    _selectedAlunoName = value;
+  }
+
+  /// Currently selected plan id.
+  String _selectedPlanejamentoId = '';
+  String get selectedPlanejamentoId => _selectedPlanejamentoId;
+  set selectedPlanejamentoId(String value) {
+    _selectedPlanejamentoId = value;
+  }
+
+  /// Current user role loaded from profiles.
+  String _currentUserRole = '';
+  String get currentUserRole => _currentUserRole;
+  set currentUserRole(String value) {
+    _currentUserRole = value;
+  }
 }
 
 void _safeInit(Function() initializeField) {
